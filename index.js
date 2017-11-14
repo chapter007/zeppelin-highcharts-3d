@@ -158,4 +158,5 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
             }
         },
         series: [{ name: '测试数据', data: data}]
+    }
 }
