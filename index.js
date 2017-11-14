@@ -168,7 +168,7 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
             enabled: false
         },
         series: [{
-            name: '随机数据',
+            name: '电池数据',
             colorByPoint: true,
             data: data
         }]
