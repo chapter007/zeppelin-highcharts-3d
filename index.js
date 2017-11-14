@@ -137,38 +137,10 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
                 depth: 250,
                 viewDistance: 5,
                 frame: {
-                    bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
+                    bottom: { size: 1, color: 'rgba(0,0,0,1.02)' },
                     back: { size: 1, color: 'rgba(0,0,0,0.04)' },
                     side: { size: 1, color: 'rgba(0,0,0,0.06)' }
                     }
-            },
-            title: {
-                text: '3D散点图'
-            },
-            subtitle: {
-                text: '单击并拖动鼠标可旋转绘图区'
-            },
-            xAxis: {
-                gridLineWidth: 1,
-                title: { text: xAxisName, },
-            },
-            yAxis: {
-                startOnTick: false,
-                endOnTick: false,
-                title: { text: yAxisName, },
-                maxPadding: 0.2,
-            },
-            zAxis: {
-            },
-            plotOptions: {
-                scatter: {
-                    width: 100,
-                    height: 10,
-                    depth: 100
-                }
-            },
-            legend: {
-                enabled: false
             },
             series: [{ name: '测试数据', data: data, }]
         }
