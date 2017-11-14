@@ -137,9 +137,9 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
                 depth: 250,
                 viewDistance: 5,
                 frame: {
-                    bottom: { size: 1, color: 'rgba(0,0,0,1.02)' },
-                    back: { size: 1, color: 'rgba(0,0,0,0.04)' },
-                    side: { size: 1, color: 'rgba(0,0,0,0.06)' }
+                    bottom: { size: 1, color: 'rgba(0,0,0,0.52)' },
+                    back: { size: 1, color: 'rgba(0,0,0,0.34)' },
+                    side: { size: 1, color: 'rgba(0,0,0,0.46)' }
                     }
             },
             series: [{ name: '测试数据', data: data, }]
