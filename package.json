@@ -1,0 +1,28 @@
+{
+  "name": "zeppelin-highcharts-3d",
+  "version": "0.0.2",
+  "description": "3d Chart for Apache Zeppelin using highcharts.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1ambda/zeppelin-highcharts-bubble.git"
+  },
+  "keywords": [ "zeppelin" ],
+  "author": "zhangjie",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "bugs": {
+    "url": "https://github.com/1ambda/zeppelin-highcharts-bubble/issues"
+  },
+  "homepage": "https://github.com/1ambda/zeppelin-highcharts-bubble#readme",
+  "dependencies": {
+    "highcharts": "^5.0.6",
+    "zeppelin-tabledata": "*",
+    "zeppelin-vis": "*"
+  },
+  "helium": {
+    "icon":"<svg id=\"Слой_1\" style=\"enable-background:new 0 0 512 512;\" version=\"1.1\" viewBox=\"0 0 512 512\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><style type=\"text/css\"> .st0{fill:none;stroke:#FFFFFF;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} .st1{fill:#248139;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} .st2{fill:#F5BE40;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} .st3{fill:#32A9B8;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} .st4{fill:#CF3722;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} </style><g><polyline class=\"st0\" points=\"33.9,54.6 33.9,485.6 473,485.6  \"/><circle class=\"st1\" cx=\"100.5\" cy=\"414.8\" r=\"35.7\"/><circle class=\"st2\" cx=\"186.4\" cy=\"293.1\" r=\"55.1\"/><circle class=\"st3\" cx=\"314.7\" cy=\"379.1\" r=\"32.2\"/><circle class=\"st4\" cx=\"322.7\" cy=\"141.9\" r=\"66\"/><circle class=\"st1\" cx=\"421\" cy=\"283\" r=\"40.7\"/><circle class=\"st3\" cx=\"123.7\" cy=\"152.1\" r=\"23.2\"/></g></svg>"
+  }
+}
