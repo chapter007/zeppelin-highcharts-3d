@@ -126,7 +126,6 @@ export function createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex,rows) {
 }
 
 export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
-    console.log(data);
     return {
         chart: {
             margin: 100,
