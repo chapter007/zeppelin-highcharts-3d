@@ -64,8 +64,10 @@ Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function 
     };
 });
 
-    // Add mouse events for rotation
-    $(chart.container).bind('mousedown.hc touchstart.hc', function (e) {
+var chart=new Highcharts.chart(this.targetEl[0].id, chartOption);
+
+// Add mouse events for rotation
+$(chart.container).bind('mousedown.hc touchstart.hc', function (e) {
         e = chart.pointer.normalize(e);
         var posX = e.pageX,
         posY = e.pageY,
@@ -90,9 +92,7 @@ Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function 
                 $(document).unbind('.hc');
         }
         });
-    });
-
-    Highcharts.chart(this.targetEl[0].id, chartOption);
+});
 
 }
 
@@ -108,7 +108,7 @@ getTransformation() {
  *
  * See also: * http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bubble/
  */
- export function createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex,
+export function createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex,
     categoryIndex, rows) {
     const data = []
     for (let i = 0; i < rows.length; i++) {
@@ -146,7 +146,7 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,
                     bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
                     back: { size: 1, color: 'rgba(0,0,0,0.04)' },
                     side: { size: 1, color: 'rgba(0,0,0,0.06)' }
-                }
+                    }
             },
             title: {
                 text: '3D散点图'
@@ -154,14 +154,12 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,
             subtitle: {
                 text: '单击并拖动鼠标可旋转绘图区'
             },
-
             xAxis: {
                 gridLineWidth: 1,
                 min: 0,
                 max: 10,
                 title: { text: xAxisName, },
             },
-
             yAxis: {
                 min: 0,
                 max: 10,
