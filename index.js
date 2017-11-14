@@ -11,10 +11,10 @@ export default class m3dChart extends Visualization {
         super(targetEl, config)
 
         this.props = [
-            { name: 'xAxis', },
-            { name: 'yAxis', },
-            { name: 'zAxis', },
-            { name: 'category', },
+        { name: 'xAxis', },
+        { name: 'yAxis', },
+        { name: 'zAxis', },
+        { name: 'category', },
         ]
 
         this.transformation = new ColumnselectorTransformation(
@@ -31,7 +31,7 @@ export default class m3dChart extends Visualization {
      * Each row is an array including values.
      *  For example, `["19", "4"]`
      */
-    render(tableData) {
+     render(tableData) {
         const conf = this.config
 
         /** can be rendered when all axises are defined */
@@ -49,13 +49,56 @@ export default class m3dChart extends Visualization {
         const data = createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex, categoryIndex, rows)
         const chartOption = createHighchartOption(xAxisName, yAxisName, zAxisName, categoryName, data);
 
-        Highcharts.chart(this.targetEl[0].id, chartOption);
+// for point look like 3d
+Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function (color) {
+    return {
+        radialGradient: {
+            cx: 0.4,
+            cy: 0.3,
+            r: 0.5
+        },
+        stops: [
+        [0, color],
+        [1, Highcharts.Color(color).brighten(-0.2).get('rgb')]
+        ]
+    };
+});
 
-    }
+    // Add mouse events for rotation
+    $(chart.container).bind('mousedown.hc touchstart.hc', function (e) {
+        e = chart.pointer.normalize(e);
+        var posX = e.pageX,
+        posY = e.pageY,
+        alpha = chart.options.chart.options3d.alpha,
+        beta = chart.options.chart.options3d.beta,
+        newAlpha,
+        newBeta,
+        sensitivity = 5; // lower is more sensitive
+        $(document).bind({
+                'mousemove.hc touchdrag.hc': function (e) {
+                // Run beta
+                newBeta = beta + (posX - e.pageX) / sensitivity;
+                newBeta = Math.min(100, Math.max(-100, newBeta));
+                chart.options.chart.options3d.beta = newBeta;
+                // Run alpha
+                newAlpha = alpha + (e.pageY - posY) / sensitivity;
+                newAlpha = Math.min(100, Math.max(-100, newAlpha));
+                chart.options.chart.options3d.alpha = newAlpha;
+                chart.redraw(false);
+            },
+        'mouseup touchend': function () {
+                $(document).unbind('.hc');
+        }
+        });
+    });
 
-    getTransformation() {
-        return this.transformation
-    }
+    Highcharts.chart(this.targetEl[0].id, chartOption);
+
+}
+
+getTransformation() {
+    return this.transformation
+}
 }
 
 /**
@@ -65,8 +108,8 @@ export default class m3dChart extends Visualization {
  *
  * See also: * http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/bubble/
  */
-export function createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex,
-                                    categoryIndex, rows) {
+ export function createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex,
+    categoryIndex, rows) {
     const data = []
     for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
@@ -88,7 +131,7 @@ export function createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex,
 }
 
 export function createHighchartOption(xAxisName, yAxisName, zAxisName,
-                                      categoryName, data) {
+  categoryName, data) {
     return {
         chart: {
             margin: 100,
@@ -105,102 +148,60 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,
                     side: { size: 1, color: 'rgba(0,0,0,0.06)' }
                 }
             },
-       title: {
-            text: '3D散点图'
-        },
-        subtitle: {
-            text: '单击并拖动鼠标可旋转绘图区'
-        },
+            title: {
+                text: '3D散点图'
+            },
+            subtitle: {
+                text: '单击并拖动鼠标可旋转绘图区'
+            },
 
-        xAxis: {
-            gridLineWidth: 1,
-            min: 0,
-            max: 10,
-            title: { text: xAxisName, },
-        },
+            xAxis: {
+                gridLineWidth: 1,
+                min: 0,
+                max: 10,
+                title: { text: xAxisName, },
+            },
 
-        yAxis: {
-            min: 0,
-            max: 10,
-            startOnTick: false,
-            endOnTick: false,
-            title: { text: yAxisName, },
-            maxPadding: 0.2,
-        },
-        zAxis: {
-            min: 0,
-            max: 10
-        },
-        tooltip: {
-            useHTML: true,
-            headerFormat: '<table>',
-            pointFormat: '<tr><th colspan="2"><h3>{point._category}</h3></th></tr>' +
-            `<tr><th>${xAxisName}:</th><td>{point.x}</td></tr>` +
-            `<tr><th>${yAxisName}:</th><td>{point.y}</td></tr>` +
-            `<tr><th>${zAxisName}:</th><td>{point.z}</td></tr>`,
-            footerFormat: '</table>',
-            followPointer: true
-        },
+            yAxis: {
+                min: 0,
+                max: 10,
+                startOnTick: false,
+                endOnTick: false,
+                title: { text: yAxisName, },
+                maxPadding: 0.2,
+            },
+            zAxis: {
+                min: 0,
+                max: 10
+            },
+            tooltip: {
+                useHTML: true,
+                headerFormat: '<table>',
+                pointFormat: '<tr><th colspan="2"><h3>{point._category}</h3></th></tr>' +
+                `<tr><th>${xAxisName}:</th><td>{point.x}</td></tr>` +
+                `<tr><th>${yAxisName}:</th><td>{point.y}</td></tr>` +
+                `<tr><th>${zAxisName}:</th><td>{point.z}</td></tr>`,
+                footerFormat: '</table>',
+                followPointer: true
+            },
 
-        plotOptions: {
-            series: {
-                dataLabels: {
-                    enabled: true,
-                    format: '{point._category}'
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point._category}'
+                    }
+                },
+                scatter: {
+                    width: 10,
+                    height: 10,
+                    depth: 10
                 }
             },
-            scatter: {
-                width: 10,
-                height: 10,
-                depth: 10
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        series: [{ name: zAxisName, data: data, }]
+            legend: {
+                enabled: false
+            },
+            series: [{ name: zAxisName, data: data, }]
+        }
     }
-
-    // for point look like 3d
-    Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function (color) {
-        return {
-            radialGradient: {
-                cx: 0.4,
-                cy: 0.3,
-                r: 0.5
-            },
-            stops: [
-                [0, color],
-                [1, Highcharts.Color(color).brighten(-0.2).get('rgb')]
-            ]
-        };
-    });
-   
-    // Add mouse events for rotation
-    $(chart.container).bind('mousedown.hc touchstart.hc', function (e) {
-        e = chart.pointer.normalize(e);
-        var posX = e.pageX,
-            posY = e.pageY,
-            alpha = chart.options.chart.options3d.alpha,
-            beta = chart.options.chart.options3d.beta,
-            newAlpha,
-            newBeta,
-            sensitivity = 5; // lower is more sensitive
-        $(document).bind({
-            'mousemove.hc touchdrag.hc': function (e) {
-                // Run beta
-                newBeta = beta + (posX - e.pageX) / sensitivity;
-                newBeta = Math.min(100, Math.max(-100, newBeta));
-                chart.options.chart.options3d.beta = newBeta;
-                // Run alpha
-                newAlpha = alpha + (e.pageY - posY) / sensitivity;
-                newAlpha = Math.min(100, Math.max(-100, newAlpha));
-                chart.options.chart.options3d.alpha = newAlpha;
-                chart.redraw(false);
-            },
-            'mouseup touchend': function () {
-                $(document).unbind('.hc');
-            }
-        });
-    });
 }
