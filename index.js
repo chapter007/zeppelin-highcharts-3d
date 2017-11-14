@@ -137,9 +137,9 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
                 depth: 250,
                 viewDistance: 5,
                 frame: {
-                    bottom: { size: 1, color: 'rgba(0,0,0,0.52)' },
-                    back: { size: 1, color: 'rgba(0,0,0,0.34)' },
-                    side: { size: 1, color: 'rgba(0,0,0,0.46)' }
+                    bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
+                    back: { size: 1, color: 'rgba(0,0,0,0.04)' },
+                    side: { size: 1, color: 'rgba(0,0,0,0.06)' }
                 }
             }
         },
@@ -156,6 +156,27 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
                 depth: 10
             }
         },
-        series: [{ name: '测试数据', data: data}]
+        yAxis: {
+            min: 0,
+            max: 10,
+            title: null
+        },
+        xAxis: {
+            min: 0,
+            max: 10,
+            gridLineWidth: 1
+        },
+        zAxis: {
+            min: 0,
+            max: 10
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: '随机数据',
+            colorByPoint: true,
+            data: data
+        }]
     }
 }
