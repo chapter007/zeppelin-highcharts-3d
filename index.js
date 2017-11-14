@@ -142,7 +142,7 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
                     side: { size: 1, color: 'rgba(0,0,0,0.46)' }
                     }
             },
-            series: [{ name: '测试数据', data: data, }]
+            series: [{ name: '测试数据', data: data}]
         }
     }
 }
