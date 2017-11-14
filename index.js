@@ -148,7 +148,7 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,
                     enabled: true,
                     format: '{point._category}'
                 }
-            }
+            },
             scatter: {
                 width: 10,
                 height: 10,
