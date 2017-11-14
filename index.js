@@ -141,22 +141,21 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
                     bottom: { size: 1, color: 'rgba(0,0,0,0.52)' },
                     back: { size: 1, color: 'rgba(0,0,0,0.34)' },
                     side: { size: 1, color: 'rgba(0,0,0,0.46)' }
-                    }
-            },
-            title: {
-                text: '3D散点图'
-            },
-            subtitle: {
-                text: '单击并拖动鼠标可旋转绘图区'
-            },
-            plotOptions: {
-                scatter: {
-                    width: 10,
-                    height: 10,
-                    depth: 10
                 }
-            },
-            series: [{ name: '测试数据', data: data}]
-        }
-    }
+            }
+        },
+        title: {
+            text: '3D散点图'
+        },
+        subtitle: {
+            text: '单击并拖动鼠标可旋转绘图区'
+        },
+        plotOptions: {
+            scatter: {
+                width: 10,
+                height: 10,
+                depth: 10
+            }
+        },
+        series: [{ name: '测试数据', data: data}]
 }
