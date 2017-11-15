@@ -47,21 +47,6 @@ export default class m3dChart extends Visualization {
         const data = createDataStructure(xAxisIndex, yAxisIndex, zAxisIndex, rows)
         const chartOption = createHighchartOption(xAxisName, yAxisName, zAxisName,data);
 
-// for point look like 3d
-Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function (color) {
-    return {
-        radialGradient: {
-            cx: 0.4,
-            cy: 0.3,
-            r: 0.5
-        },
-        stops: [
-        [0, color],
-        [1, Highcharts.Color(color).brighten(-0.2).get('rgb')]
-        ]
-    };
-});
-
 var chart=new Highcharts.chart(this.targetEl[0].id, chartOption);
 
 // Add mouse events for rotation
@@ -144,7 +129,7 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
             }
         },
         title: {
-            text: '3D散点图'
+            text: '电池散点图'
         },
         subtitle: {
             text: '单击并拖动鼠标可旋转绘图区'
@@ -169,7 +154,7 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
         },
         series: [{
             name: '电池数据',
-            colorByPoint: true,
+            colorByPoint: false,
             data: data
         }]
     }
