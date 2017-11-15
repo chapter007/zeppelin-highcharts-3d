@@ -115,7 +115,7 @@ export function createHighchartOption(xAxisName, yAxisName, zAxisName,data) {
         chart: {
             margin: 100,
             type: 'scatter',
-            zoomType:'x',
+            zoomType:'y',
             options3d: {
                 enabled: true,
                 alpha: 10,
